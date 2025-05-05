@@ -13,6 +13,7 @@ import {
 } from "./commands/file/index.js";
 import { handleOs } from "./commands/system/os.js";
 import { handleHash } from "./commands/hash/hash.js";
+import { handleCompress } from "./commands/compression/index.js";
 
 const state = {
   workingDirectory: homedir(),
@@ -69,6 +70,9 @@ rl.on("line", async (line) => {
         break;
       case "hash":
         await handleHash(state, args[0]);
+        break;
+      case "compress":
+        await handleCompress(state, args[0], args[1]);
         break;
       case ".exit":
         exitApp();
