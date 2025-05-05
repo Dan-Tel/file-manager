@@ -11,6 +11,7 @@ import {
   handleMv,
   handleRm,
 } from "./commands/file/index.js";
+import { handleOs } from "./commands/system/os.js";
 
 const state = {
   workingDirectory: homedir(),
@@ -61,6 +62,9 @@ rl.on("line", async (line) => {
         break;
       case "rm":
         await handleRm(state, args[0]);
+        break;
+      case "os":
+        handleOs(args[0]);
         break;
       case ".exit":
         exitApp();
