@@ -1,7 +1,12 @@
 import { homedir } from "node:os";
 import { createInterface } from "node:readline";
 
-let workingDirectory = homedir();
+import { handleUp } from "./commands/navigation/index.js";
+
+const state = {
+  workingDirectory: homedir(),
+};
+
 const username = process.argv.slice(2)[0]?.split("=")[1] || "Anonymous";
 
 console.log(`Welcome to the File Manager, ${username}!`);
@@ -18,6 +23,9 @@ rl.on("line", async (line) => {
 
   try {
     switch (command) {
+      case "up":
+        handleUp(state);
+        break;
       case ".exit":
         exitApp();
         return;
@@ -26,14 +34,14 @@ rl.on("line", async (line) => {
         break;
     }
   } catch (e) {
-    console.log("Operation failed", e.message);
+    console.log("Operation failed");
   }
 
   printDirectory();
 });
 
 function printDirectory() {
-  console.log(`You are currently in ${workingDirectory}`);
+  console.log(`You are currently in ${state.workingDirectory}`);
 }
 
 function exitApp() {
