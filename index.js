@@ -12,6 +12,7 @@ import {
   handleRm,
 } from "./commands/file/index.js";
 import { handleOs } from "./commands/system/os.js";
+import { handleHash } from "./commands/hash/hash.js";
 
 const state = {
   workingDirectory: homedir(),
@@ -65,6 +66,9 @@ rl.on("line", async (line) => {
         break;
       case "os":
         handleOs(args[0]);
+        break;
+      case "hash":
+        await handleHash(state, args[0]);
         break;
       case ".exit":
         exitApp();
