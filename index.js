@@ -2,7 +2,7 @@ import { homedir } from "node:os";
 import { createInterface } from "node:readline";
 
 import { handleUp, handleCd, handleLs } from "./commands/navigation/index.js";
-import { handleCat, handleAdd } from "./commands/file/index.js";
+import { handleCat, handleAdd, handleMkdir } from "./commands/file/index.js";
 
 const state = {
   workingDirectory: homedir(),
@@ -38,6 +38,9 @@ rl.on("line", async (line) => {
         break;
       case "add":
         await handleAdd(state, args[0]);
+        break;
+      case "mkdir":
+        await handleMkdir(state, args[0]);
         break;
       case ".exit":
         exitApp();
