@@ -1,7 +1,7 @@
 import { homedir } from "node:os";
 import { createInterface } from "node:readline";
 
-import { handleUp, handleCd } from "./commands/navigation/index.js";
+import { handleUp, handleCd, handleLs } from "./commands/navigation/index.js";
 
 const state = {
   workingDirectory: homedir(),
@@ -28,6 +28,9 @@ rl.on("line", async (line) => {
         break;
       case "cd":
         await handleCd(state, args[0]);
+        break;
+      case "ls":
+        await handleLs(state);
         break;
       case ".exit":
         exitApp();
