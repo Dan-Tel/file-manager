@@ -9,6 +9,7 @@ import {
   handleRn,
   handleCp,
   handleMv,
+  handleRm,
 } from "./commands/file/index.js";
 
 const state = {
@@ -57,6 +58,9 @@ rl.on("line", async (line) => {
         break;
       case "mv":
         await handleMv(state, args[0], args[1]);
+        break;
+      case "rm":
+        await handleRm(state, args[0]);
         break;
       case ".exit":
         exitApp();
